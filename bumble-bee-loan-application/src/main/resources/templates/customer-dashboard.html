@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
+    <title>animated sinin and signup panel. animated login and registeration page, popup, - Bootsnipp.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css?family=Mukta');
+        body {
+            color: #00171F;
+            font-family: Lato, sans-serif;
+            background-color: #f6f6f6;
+        }
+
+        a {
+            color: #007EA7;
+            text-decoration: none;
+        }
+
+        p {
+            color: #444;
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        h1 {
+            padding-bottom: 10px;
+            margin-top: 0;
+            font-size: 42px;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #ddd;
+            cursor: default;
+        }
+
+        h2 {
+            color: #003459;
+            margin-bottom: 10px;
+        }
+
+        table {
+            margin-top: 20px;
+            width: 100%;
+            color: #29516d;
+            font-size: 14px;
+            border-spacing: 0;
+        }
+        table th,
+        table td {
+            padding: 10px;
+        }
+        table thead th {
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        table tbody tr:nth-of-type(odd) {
+            background-color: #f6f6f6;
+        }
+        table tbody tr:hover {
+            background-color: #ecf7ff;
+        }
+
+        .btn {
+            padding: 10px;
+            margin: 0 5px;
+            border: 0;
+            color: white;
+            background-color: #00A8E8;
+        }
+        .btn:first-child {
+            margin-left: 0;
+        }
+
+        .btn-delete {
+            background-color: #d90000;
+        }
+
+        /**
+          Container
+        */
+        .app-container {
+            display: flex;
+            flex-flow: row wrap;
+            height: 100vh;
+        }
+
+        /**
+          Navigation
+        */
+        .nav {
+            flex: 1;
+            max-width: 180px;
+            background-color: #007EA7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .nav__logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+            color: #ccc;
+            font-size: 24px;
+            letter-spacing: 1px;
+            background-color: #00171F;
+            cursor: default;
+            text-shadow: 1px 1px 3px black;
+            cursor: pointer;
+        }
+
+        .nav__list {
+            margin: 40px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav__list-item {
+            position: relative;
+        }
+
+        .nav__list-item--active {
+            padding: 10px 0 10px 15px;
+        }
+        .nav__list-item--active .nav__item-link {
+            padding: 15px 15px;
+            color: #1a1a1a;
+            font-weight: 700;
+            background-color: #FFFBFC;
+        }
+
+        .nav__item-link {
+            display: block;
+            padding: 10px 30px;
+            color: #eee;
+        }
+
+        /**
+          App View
+        */
+        .app-view {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+        }
+
+        /**
+          Utility Bar
+        */
+        .utility-bar {
+            height: 50px;
+            font-size: 13px;
+            font-weight: 300;
+            background-color: #002a38;
+        }
+
+        .utility-bar__inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+            height: 100%;
+        }
+
+        .utility-bar__list {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .utility-bar__item-link {
+            display: flex;
+            justify-content: center;
+            width: 40px;
+            height: 50px;
+        }
+        .utility-bar__item-link svg,
+        .utility-bar__item-link svg path {
+            fill: #007EA7 !important;
+            transition: fill 200ms ease-out;
+        }
+        .utility-bar__item-link:hover svg,
+        .utility-bar__item-link:hover svg path {
+            fill: #00A8E8 !important;
+        }
+
+        .utility-bar__indicator {
+            position: relative;
+            left: -7px;
+            top: 9px;
+            width: 14px;
+            height: 14px;
+            color: white;
+            font-size: 10px;
+            text-align: center;
+            background-color: #d90000;
+            border-radius: 100%;
+        }
+
+        .utility-bar__account {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+        }
+        .utility-bar__account:hover .utility-bar__account-name {
+            color: #eee;
+        }
+
+        .utility-bar__account-avatar {
+            display: inline-block;
+            margin-right: 10px;
+            width: 32px;
+            height: 32px;
+            background-color: #666;
+            background-image: url("http://keenanstaffieri.com/wp-content/uploads/2014/07/keenan_avatar2.jpg");
+            background-size: 100%;
+            border-radius: 100%;
+        }
+
+        .utility-bar__account-name {
+            color: #00A8E8;
+            transition: color 200ms ease-out;
+        }
+
+        /**
+          Content
+        */
+        .content {
+            flex: 1;
+            padding: 30px;
+            background-color: #FFFBFC;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+
+<div class="app-container">
+    <nav class="nav">
+        <ul class="nav__list">
+            <li class="nav__list-item">
+                <a href="#" class="nav__item-link">Dashboard</a>
+            </li>
+            <li class="nav__list-item nav__list-item--active">
+                <a href="#" class="nav__item-link">Contacts</a>
+            </li>
+            <li class="nav__list-item">
+                <a href="#" class="nav__item-link">Counter</a>
+            </li>
+            <li class="nav__list-item">
+                <a href="#" class="nav__item-link">Locations</a>
+            </li>
+            <li class="nav__list-item">
+                <a href="#" class="nav__item-link">Contracts</a>
+            </li>
+            <li class="nav__list-item">
+                <a href="#" class="nav__item-link">Statuses</a>
+            </li>
+            <li class="nav__list-item">
+                <a href="#" class="nav__item-link">Logout</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="app-view">
+        <nav class="utility-bar">
+            <div class="utility-bar__inner">
+                <ul class="utility-bar__list">
+                    <li class="utility-bar__list-item">
+                        <a href="#" class="utility-bar__item-link">
+                            <b>Bumble Bee</b>
+                        </a>
+                    </li>
+                </ul>
+                <a href="#" class="utility-bar__account">
+                    <span class="utility-bar__account-avatar"></span>
+                    <span class="utility-bar__account-name">Keenan Staffieri</span>
+                </a>
+            </div>
+        </nav>
+        <main class="content">
+            <h1>Products</h1> <button class="btn btn-success">Add</button>
+
+            <table>
+                <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Product Description</th>
+                    <th>Product Category</th>
+                    <th>Product Price</th>
+                    <th>Product Availability</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <a href="#">Keenan Staffieri</a>
+                    </td>
+                    <td>keenan@example.com</td>
+                    <td>555 ABC St.</td>
+                    <td>San Diego</td>
+                    <td>CA</td>
+                    <td>
+                        <button class="btn">Edit</button>
+                        <button class="btn btn-delete">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#">Keenan Staffieri</a>
+                    </td>
+                    <td>keenan@example.com</td>
+                    <td>555 ABC St.</td>
+                    <td>San Diego</td>
+                    <td>CA</td>
+                    <td>
+                        <button class="btn">Edit</button>
+                        <button class="btn btn-delete">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#">Keenan Staffieri</a>
+                    </td>
+                    <td>keenan@example.com</td>
+                    <td>555 ABC St.</td>
+                    <td>San Diego</td>
+                    <td>CA</td>
+                    <td>
+                        <button class="btn">Edit</button>
+                        <button class="btn btn-delete">Delete</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </main>
+
+        <main class="content">
+            <h1>Add Product</h1>
+
+            <div class="row">
+                <div class="col col-md-8 col-lg-6">
+                    <form id="addProductForm">
+                        <div class="form-group">
+                            <label for="productName">Product name</label>
+                            <input type="text" class="form-control" id="productName" placeholder="e.g. Awesome sneakers">
+                        </div>
+                        <div class="form-group">
+                            <label for="productName">Product description</label>
+                            <input type="text" class="form-control" id="productDesc" placeholder="e.g. Awesome sneakers">
+                        </div>
+                        <div class="form-group">
+                            <label for="productName">Product category</label>
+                            <input type="text" class="form-control" id="productCategory" placeholder="e.g. Awesome sneakers">
+                        </div>
+                        <div class="form-group">
+                            <label for="productName">Product availability</label>
+                            <input type="text" class="form-control" id="productAvailability" placeholder="e.g. Awesome sneakers">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productPrice">Product price</label>
+                            <input type="number" class="form-control" id="productPrice" placeholder="e.g. $130">
+                        </div>
+                        <button id="btnSubmit" type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+</div>
+</body>
+</html>
