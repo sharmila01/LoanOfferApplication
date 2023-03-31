@@ -377,5 +377,25 @@
 </div>
 
 </div>
+<script>
+    $( document ).ready(function() {
+        $.ajax({
+            url: 'http://localhost:8080/get/all/products',
+            type: 'GET',
+            dataType : "json",
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            success: function (data,textStatus,xhr) {
+                console.log(data)
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log('Error in Database');
+
+            }
+        })
+    });
+</script>
+
 </body>
 </html>
