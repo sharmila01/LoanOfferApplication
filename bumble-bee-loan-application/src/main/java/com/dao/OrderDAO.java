@@ -5,8 +5,10 @@ import com.dto.request.GetOrderDetailReq;
 import com.dto.response.CommonResponse;
 import com.dto.response.GetOrderDetailRes;
 import com.dto.response.Product;
+import com.dto.response.Category;
 
 import java.util.List;
+import java.util.Locale;
 
 public interface OrderDAO {
 
@@ -16,6 +18,7 @@ public interface OrderDAO {
      */
     public List<Product> getAllProducts();
 
+    public List<Category> getAllCategories();
     /**
      * getOrderSingleCalculation
      * @param getOrderDetailReq

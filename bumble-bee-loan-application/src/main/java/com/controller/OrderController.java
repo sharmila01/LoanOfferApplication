@@ -13,6 +13,12 @@ public interface OrderController {
     public LoanOfferResponse getAllProducts();
 
     /**
+     * getAllCategories
+     * @return
+     */
+    public LoanOfferResponse getAllCategories();
+
+    /**
      * getOrderSingleCalculation
      * @param getOrderDetailReq
      * @return

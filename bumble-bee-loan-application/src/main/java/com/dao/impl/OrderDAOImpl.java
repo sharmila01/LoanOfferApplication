@@ -5,11 +5,9 @@ import com.dao.OrderDAO;
 import com.dto.request.CreateOrderReq;
 import com.dto.request.GetOrderDetailReq;
 import com.dto.response.CommonResponse;
-import com.dto.response.GeneralResponse;
 import com.dto.response.GetOrderDetailRes;
 import com.dto.response.Product;
-import com.dto.user.response.CustomerRes;
-import com.util.HashUtil;
+import com.dto.response.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceUtils;
@@ -54,6 +52,35 @@ public class OrderDAOImpl implements OrderDAO {
         } finally {
             DataSourceUtils.releaseConnection(connection, jdbcTemplate.getDataSource());
             logger.info("Time taken for getAllProducts in seconds: " + (double) (System.currentTimeMillis() - startTime) / 1000);
+        }
+        return list;
+    }
+    @Override
+    public List<Category> getAllCategories() {
+        Long startTime = System.currentTimeMillis();
+        List<Category> list = null;
+        Connection connection = null;
+        CallableStatement callableStatement;
+        ResultSet resultSet;
+        try {
+            connection = DataSourceUtils.getConnection(jdbcTemplate.getDataSource());
+            callableStatement = connection.prepareCall(OfferDAOConstant.OrderConstant.GET_ALL_CATEGORIES);
+            callableStatement.execute();
+            resultSet = callableStatement.getResultSet();
+            if (resultSet != null) {
+                list = new ArrayList<>();
+                while (resultSet.next()) {
+                    Category response = new Category();
+                    response.setCategoryId(resultSet.getInt(1));
+                    response.setCategoryName(resultSet.getString(2));
+                    list.add(response);
+                }
+            }
+        } catch (SQLException exception) {
+            logger.info("An error occured in getAllCategories " + exception.toString());
+        } finally {
+            DataSourceUtils.releaseConnection(connection, jdbcTemplate.getDataSource());
+            logger.info("Time taken for getAllCategories in seconds: " + (double) (System.currentTimeMillis() - startTime) / 1000);
         }
         return list;
     }

@@ -6,11 +6,10 @@ import com.dto.request.CreateOrderReq;
 import com.dto.request.GetOrderDetailReq;
 import com.dto.request.OrderInfoReq;
 import com.dto.response.CommonResponse;
-import com.dto.response.GetOrderDetailRes;
 import com.dto.response.Product;
+import com.dto.response.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -26,6 +25,9 @@ public class OrderBusinessImpl implements OrderBusiness {
     public List<Product> getAllProducts() {
         return orderDAO.getAllProducts();
     }
+
+    @Override
+    public  List<Category> getAllCategories() {return orderDAO.getAllCategories();}
 
     @Override
     public CommonResponse getOrderSingleCalculation(GetOrderDetailReq getOrderDetailReq) {

@@ -1,22 +1,19 @@
 package com.controller.impl;
-
 import com.business.OrderBusiness;
 import com.controller.OrderController;
 import com.dto.request.CreateOrderReq;
 import com.dto.request.GetOrderDetailReq;
 import com.dto.response.CommonResponse;
-import com.dto.response.GetOrderDetailRes;
 import com.dto.response.LoanOfferResponse;
 import com.dto.response.Product;
+import com.dto.response.Category;
 import com.util.ApplicationConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
-
 @RestController
 @CrossOrigin(origins = "*")
 public class OrderControllerImpl implements OrderController {
@@ -31,6 +28,16 @@ public class OrderControllerImpl implements OrderController {
                 productList,
                 ApplicationConstant.SuccessStatusCode,
                 ApplicationConstant.SuccessMsg);
+    }
+
+    @PostMapping("get/all/categories")
+    public  LoanOfferResponse getAllCategories() {
+        List<Category> categoryList = orderBusiness.getAllCategories();
+        return  LoanOfferResponse.generateResponse(
+                categoryList,
+                ApplicationConstant.SuccessStatusCode,
+                ApplicationConstant.SuccessMsg
+        );
     }
 
     @Override
