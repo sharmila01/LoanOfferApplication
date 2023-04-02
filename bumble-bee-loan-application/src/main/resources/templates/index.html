@@ -32,7 +32,7 @@
             width: 100%;
             border: none;
             color: #ffffff;
-            padding: 14px 10px 14px 45px;
+            padding: 14px 55px 14px 45px;
             margin-top: 20px;
             background: #f47471;
             z-index: 2;
@@ -193,21 +193,21 @@
         }
 
         .panel {
-            width: 640px;
+            /*width: 640px;*/
             height: auto;
             display: flex;
             justify-content: center;
             align-items: center;
         }
         .panel .login {
-            width: 300px;
-            height: 380px;
+            width: 340px;
+            height: 500px;
             background: #292c3b;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            transform: translateX(140px);
+            transform: translateX(290px);
             position: relative;
             z-index: 1;
             transition: filter 0.5s;
@@ -252,8 +252,8 @@
             background: #f25d59;
             box-shadow: 5px 14px 20px 0 #f68b88;
             width: 100%;
-            width: 340px;
-            height: 440px;
+            width: 540px;
+            height: 570px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -409,24 +409,62 @@
         <label class="button-close" for="switch-close"></label>
         <div class="inner">
             <h1>REGISTER</h1>
-            <div class="group"><i class="fa fa-user" aria-hidden="true"></i>
-                <input id="name" type="text" placeholder="Name"/>
-                <label for="name"></label>
+            <div class="row">
+                <div class="col-md-6">
+                    <!--firstName-->
+                    <div class="group"><i class="fa fa-user" aria-hidden="true"></i>
+                        <input id="firstName" type="text" placeholder="First Name"/>
+                        <label for="firstName"></label>
+                    </div>
+                    <!--lastName-->
+                    <div class="group"><i class="fa fa-user" aria-hidden="true"></i>
+                        <input id="lastName" type="text" placeholder="Last Name"/>
+                        <label for="lastName"></label>
+                    </div>
+                    <!--dob-->
+                    <div class="group"><i class="fa fa-calendar" aria-hidden="true"></i>
+                        <input id="dob" type="date" placeholder="DD-MM-YYYY"/>
+                        <label for="dob"></label>
+                    </div>
+                     <!--userType-->
+                    <div class="group"><i class="fa fa-user" aria-hidden="true"></i>
+                        <input id="userType" type="text" placeholder="User Type" value="1" disabled/>
+                        <label for="userType"></label>
+                    </div>
+                    <!--userName-->
+                    <div class="group"><i class="fa fa-user" aria-hidden="true"></i>
+                        <input id="userName1" type="text" placeholder="User Name"/>
+                        <label for="userName1"></label>
+                    </div>
+                    <div class="group"><i class="fa fa-envelope" aria-hidden="true"></i>
+                        <input id="userEmail" type="text" placeholder="Email"/>
+                        <label for="userEmail"></label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="group"><i class="fa fa-mobile" aria-hidden="true"></i>
+                        <input id="userMobileNumber" type="text" placeholder="Mobile Number"/>
+                        <label for="userMobileNumber"></label>
+                    </div>
+                    <div class="group"><i class="fa fa-user" aria-hidden="true"></i>
+                        <input id="nic" type="text" placeholder="NIC"/>
+                        <label for="nic"></label>
+                    </div>
+                    <div class="group"><i class="fa fa-money" aria-hidden="true"></i>
+                        <input id="loanBalance" type="text" placeholder="Loan Balance" value="15000" disabled />
+                        <label for="loanBalance"></label>
+                    </div>
+                    <div class="group"><i class="fa fa-money" aria-hidden="true"></i>
+                        <input id="usedAmount" type="text" placeholder="Used Amount" value="0" disabled/>
+                        <label for="usedAmount"></label>
+                    </div>
+                    <div class="group"><i class="fa fa-user" aria-hidden="true"></i>
+                        <input id="installmentPlan" type="text" placeholder="Installment Plan" value="1" disabled/>
+                        <label for="installmentPlan"></label>
+                    </div>
+                </div>
             </div>
-            <div class="group"><i class="fa fa-calendar" aria-hidden="true"></i>
-                <input id="dob" type="date" placeholder="DD-MM-YYYY"/>
-                <label for="name"></label>
-            </div>
-
-            <div class="group"><i class="fa fa-envelope" aria-hidden="true"></i>
-                <input id="emailId" type="text" placeholder="E-Mail"/>
-                <label for="emailId"></label>
-            </div>
-            <div class="group"><i class="fa fa-unlock-alt" aria-hidden="true"></i>
-                <input id="pword" type="password" placeholder="Password"/>
-                <label for="password"></label>
-            </div>
-            <input type="submit" value="REGISTER"/>
+            <input type="submit" value="REGISTER" onclick="registerUser();"/>
         </div>
     </div>
 </div>
@@ -471,31 +509,32 @@
         var firstName = document.getElementById('firstName');
         var lastName = document.getElementById('lastName');
         var dob = document.getElementById('dob');
-        var userType = 1;
-        var userName = document.getElementById('userName');
+        var userType = document.getElementById('userType');
+        var userName = document.getElementById('userName1');
         var userEmail = document.getElementById('userEmail');
-        var mobileNo = document.getElementById('mobileNo');
+        var userMobileNumber = document.getElementById('userMobileNumber');
         var nic = document.getElementById('nic');
-        var customerId = 1;
+        var customerId = 0;
         var loanBalance = document.getElementById('loanBalance');
         var usedAmount = document.getElementById('usedAmount');
         var installmentPlan = document.getElementById('installmentPlan');
 
-        const registerRequestObject = {userId: 0, firstName: firstName.value,lastName : lastName.value,
-        dob: dob.value, userType: userType.value, userName: userName.value,userName: userName.value,
-            userEmail:userEmail.value,mobileNo:mobileNo.value,nic:nic.value,customerId:customerId.value,
+        const registerRequestObject = {userId: userId, firstName: firstName.value,lastName : lastName.value,
+        dob: dob.value, userType: userType.value, userName: userName.value,
+            userEmail:userEmail.value,userMobileNumber:userMobileNumber.value,nic:nic.value,customerId:customerId,
             loanBalance:loanBalance.value,usedAmount:usedAmount.value,installmentPlan:installmentPlan.value};
-
 
         $.ajax({
             type: 'POST',
             dataType: "json",
-            url: JSON.stringify(registerRequestObject),
+            url: 'http://localhost:8080/create/new/user',
+            data: JSON.stringify(registerRequestObject),
             headers: {
                 'Content-Type' : 'application/json',
             },
             success: function (data) {
                 console.log('data:', data);
+                window.location.href = "home.html";
             }
         });
     }
