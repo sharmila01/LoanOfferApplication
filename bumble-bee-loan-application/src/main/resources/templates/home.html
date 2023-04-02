@@ -290,65 +290,20 @@
 
         <main class="content">
             <h1>Customers</h1>
-            <table>
+            <table class="tblCustomers">
                 <thead>
                 <tr>
-                    <th>Customer Id</th>
-                    <th>Name</th>
-                    <th>Email</th>
+                    <th>Full Name</th>
                     <th>Date Of Birth</th>
+                    <th>User Type</th>
+                    <th>User Email</th>
+                    <th>Mobile Number</th>
                     <th>Loan Balance</th>
                     <th>Used Amount</th>
                     <th>Installment Plan</th>
-                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>
-                        <a href="#">Keenan Staffieri</a>
-                    </td>
-                    <td>keenan@example.com</td>
-                    <td>555 ABC St.</td>
-                    <td>San Diego</td>
-                    <td>CA</td>
-                    <td>55555</td>
-                    <td></td>
-                    <td>
-                        <button class="btn">Edit</button>
-                        <button class="btn btn-delete">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="#">Sean Staffieri</a>
-                    </td>
-                    <td>sean@example.com</td>
-                    <td>555 XYZ Ave.</td>
-                    <td>Los Angeles</td>
-                    <td>CA</td>
-                    <td>55555</td>
-                    <td></td>
-                    <td>
-                        <button class="btn">Edit</button>
-                        <button class="btn btn-delete">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="#">Ziggy Staffieri</a>
-                    </td>
-                    <td>ziggy@example.com</td>
-                    <td>555 Yoyo Ave.</td>
-                    <td>Austin</td>
-                    <td>TX</td>
-                    <td>55555</td>
-                    <td></td>
-                    <td>
-                        <button class="btn">Edit</button>
-                        <button class="btn btn-delete">Delete</button>
-                    </td>
-                </tr>
                 </tbody>
             </table>
         </main>
@@ -359,18 +314,32 @@ $( document ).ready(function() {
     // var loggedUsername = localStorage.getItem("lastName");
 	// var userLog = document.getElementById('labelUser');
 	// userLog.innerHTML = '['+loggedUsername+']';
+    var jsonData = '';
+
     $.ajax({
         url: 'http://localhost:8080/get/customer/list',
-        type: 'GET',
+        type: 'POST',
         dataType : 'json',
-        headers : {
-            'Content-Type' : 'application/json'
+        data: {
+            json : jsonData
         },
+        contentType: "application/json; charset=utf-8",
         success: function (data,textStatus,xhr) {
-            console.log(data)
+            jsonData = data.value;
+            var rows = '';
+            $.each(jsonData, function (i,item) {
+                alert(jsonData);
+                rows += "<tr><td>" + item.fullName + "</td><td>" + item.dob + ' ' + "</td><td>" + item.userTypeStr +
+                    "</td><td>" + item.userEmail + "</td><td>" + item.userMobileNumber + "</td><td>" + item.loanBalance + "</td><td>"
+                    + item.usedAmount + "</td><td>" + item.planName + "</td></tr>";
+
+
+            });
+            $('.tblCustomers tbody').append(rows);
         },
-        error: function (xhr, textStatus, errorThrown) {
-            console.log('Error in Database');
+        error: function (data,xhr, textStatus, errorThrown) {
+            var r = jQuery.parseJSON(data.responseText);
+            alert("Message: " + r.Message);
 
         }
     })
